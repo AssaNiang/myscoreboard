@@ -17,16 +17,20 @@ public class PlayerDTO {
     private Integer contests;
 
     public PlayerDTO(Player player) {
-        this.id =player.getId();
-        this.email= player.getEmail();
+        this.id = player.getId();
+        this.email = player.getEmail();
         this.nickname = player.getNickname();
         this.wins = new ArrayList<String>();
-        if(player.getWins() !=null){
+        if (player.getWins() != null) {
             for (Contest contest : player.getWins()) {
-             this.wins.add(
-                "La Partie n°" + contest.getId() +"de"+contest.getGame().getTitle()+ "du" + contest.getStartDate());
+                this.wins.add(
+                        "La Partie n°" + contest.getId() + "de" + contest.getGame().getTitle() + "du"
+                                + contest.getStartDate());
             }
         }
-        this.contests = player.getContests().size();
+        if (player.getContests() != null)
+            this.contests = player.getContests().size();
+        else
+            this.contests = 0;
     }
 }
