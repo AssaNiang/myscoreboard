@@ -3,8 +3,6 @@ package com.simplon.api.model.dto;
 import java.sql.Date;
 
 import com.simplon.api.model.Contest;
-import com.simplon.api.model.Game;
-import com.simplon.api.model.Player;
 
 import lombok.Data;
 
@@ -27,6 +25,11 @@ public class ContestDTO {
             this.winner = "pas de vainqueur";
         }
        // this.winner =contest.getWinner() !=null?contest.getWinner().getNickname():"pas de vaiqueur";
+        /* EXERCICE : le ContestDTO doit contenir la liste des players participants.
+         *                  C'st une liste de String qui ressemble à 
+         *    id - nickmane (email)
+         * 
+         */
     }
 
 }

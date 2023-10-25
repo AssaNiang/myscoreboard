@@ -20,14 +20,18 @@ public class Contest {
     @Id /* clé primaire */
     @GeneratedValue(strategy = GenerationType.IDENTITY) /* auto increment */
     private Long id;
+
     @Column(name = "start_date")
     private Date startDate;
+
     @ManyToOne // plusieurs contest(partie) pour un jeu la clé etrangere est dans cette table
-     @JoinColumn(name ="id_game")
+    @JoinColumn(name = "id_game")
     private Game game;
+
     @ManyToOne
-    @JoinColumn(name="id_winner")//si je voulais winner_id il faut pas ajouter @joinColum
+    @JoinColumn(name = "id_winner") // si je voulais winner_id il faut pas ajouter @joinColum
     private Player winner;
-    @ManyToMany(mappedBy="contests")
-    private List<Player>players;
+
+    @ManyToMany(mappedBy = "contests")//dans l'entité "contest" contests fait la relation 
+    private List<Player> players;
 }

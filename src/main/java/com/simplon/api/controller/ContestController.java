@@ -70,12 +70,13 @@ public class ContestController {
      * (alors qu'en get des données peuvent etre passé dans l'url )
      */
     @PostMapping("/contest")
-    public ContestDTO insertContest(@RequestParam String start_date,@RequestParam int id_game,@RequestParam Integer id_winner) {
+    public ContestDTO insertContest(@RequestParam String start_date,@RequestParam int id_game,@RequestParam Optional<Integer> id_winner) {
         Contest contest =new Contest();
         contest.setStartDate(Date.valueOf(start_date));
         contest.setGame(gameService.getGame(id_game).get());
-        if(id_winner != null){
-            contest.setWinner(playerService.getPlayer(id_winner).get());
+        if(id_winner.isPresent()){
+            //comme on a une valeur d'option pour la recuperer on doit faire un get()
+            contest.setWinner(playerService.getPlayer(id_winner.get()).get());
         }
         return new ContestDTO(contestService.saveContest(contest));
     }

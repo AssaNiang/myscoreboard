@@ -1,7 +1,9 @@
 package com.simplon.api.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,8 +31,8 @@ public class Player {
 
     @OneToMany(mappedBy = "winner")
     private List<Contest>wins;
-    @ManyToMany
+    @ManyToMany(cascade= CascadeType.ALL)
     @JoinTable(name="player_contest",joinColumns = { @JoinColumn(name ="id_player")},inverseJoinColumns ={ @JoinColumn(name="id_contest")})
-    private List<Contest>contests;
+    private List<Contest>contests =new ArrayList<Contest>();//pour mettre une valeure par défaut 
 
 }

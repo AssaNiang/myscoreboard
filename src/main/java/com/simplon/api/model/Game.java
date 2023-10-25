@@ -18,11 +18,22 @@ public class Game{
     @Id /*clé primaire*/
     @GeneratedValue(strategy = GenerationType.IDENTITY)/*auto increment  */
     private Long id;
+    
     private String title;
     @Column(name="min_players")
     private Integer minPlayers;
+
     @Column(name="max_players")
     private Integer maxPlayers;
-    @OneToMany(mappedBy = "game")//game = le game de la propriété game de contest
+
+    @OneToMany(mappedBy = "game")//game = le game de la propriété game de contest un jeu pour plusieurs contests (partie)
     private List<Contest>contests;
+
+    public Game(Long id,String title, Integer minPlayers, Integer maxPlayers){
+        this.id=id;
+        this.title =title;
+        this.minPlayers=minPlayers;
+        this.maxPlayers=maxPlayers;
+    }
+    public Game(){}
 }

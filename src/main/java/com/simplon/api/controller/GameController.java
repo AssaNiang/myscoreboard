@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -47,7 +48,8 @@ public class GameController {
     public GameDTO gameById(@PathVariable("id") long id) {
         Optional<Game> g = gameService.getGame(id);
         if (g.isPresent()) {
-            return new GameDTO(g.get()) ;// la methode get de l'objet Optinal retourne un objet Game et on le transforme en GameDTO en le passant par le constructeur GameDTO
+            return new GameDTO(g.get());// la methode get de l'objet Optinal retourne un objet Game et on le transforme
+                                        // en GameDTO en le passant par le constructeur GameDTO
         } else {
             return null;
         }
@@ -64,7 +66,7 @@ public class GameController {
         return new GameDTO(gameService.saveGame(g));
     }
 
-    @DeleteMapping("game/{id}")
+    @DeleteMapping("/game/{id}")
     public boolean deleteGame(@PathVariable("id") long id) {
 
         /*
@@ -102,4 +104,15 @@ public class GameController {
         return null;
     }
 
+    // on creer un controller qui appelle le service
+    @GetMapping("/game/search")
+    public List<GameDTO> search(@RequestParam("word") String word) {
+        List<Game> games = gameService.searchTitle(word);
+        List<GameDTO> gameDTOs = new ArrayList<GameDTO>();
+        for (Game game : games) {
+            gameDTOs.add(new GameDTO(game));
+        }
+        return gameDTOs;
+    }
+    
 }
